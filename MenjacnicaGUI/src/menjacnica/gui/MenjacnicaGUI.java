@@ -17,11 +17,21 @@ import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
+import java.awt.FlowLayout;
+import javax.swing.border.BevelBorder;
+import javax.swing.UIManager;
+import java.awt.Component;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.Color;
 
 public class MenjacnicaGUI extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel panel;
+	private JPanel panelEast;
 	private JButton btnDodajKurs;
 	private JButton btnObrisiKurs;
 	private JButton btnIzvrsiZamenu;
@@ -32,6 +42,8 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem mntmSave;
 	private JMenuItem mntmExit;
 	private JMenuItem mntmAbout;
+	private JScrollPane scrollPane;
+	private JTextArea textAreaSouth;
 
 	/**
 	 * Launch the application.
@@ -59,21 +71,22 @@ public class MenjacnicaGUI extends JFrame {
 		setBounds(100, 100, 450, 300);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		contentPane.add(getPanel(), BorderLayout.EAST);
+		contentPane.add(getPanelEast(), BorderLayout.EAST);
+		contentPane.add(getScrollPane(), BorderLayout.SOUTH);
 	}
 
-	private JPanel getPanel() {
-		if (panel == null) {
-			panel = new JPanel();
-			panel.setPreferredSize(new Dimension(120, 40));
-			panel.add(getBtnDodajKurs());
-			panel.add(getBtnObrisiKurs());
-			panel.add(getBtnIzvrsiZamenu());
+	private JPanel getPanelEast() {
+		if (panelEast == null) {
+			panelEast = new JPanel();
+			panelEast.setPreferredSize(new Dimension(120, 40));
+			panelEast.add(getBtnDodajKurs());
+			panelEast.add(getBtnObrisiKurs());
+			panelEast.add(getBtnIzvrsiZamenu());
 		}
-		return panel;
+		return panelEast;
 	}
 	private JButton getBtnDodajKurs() {
 		if (btnDodajKurs == null) {
@@ -145,5 +158,20 @@ public class MenjacnicaGUI extends JFrame {
 			mntmAbout = new JMenuItem("About");
 		}
 		return mntmAbout;
+	}
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setPreferredSize(new Dimension(2, 60));
+			scrollPane.setBorder(new TitledBorder(null, "STATUS", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			scrollPane.setViewportView(getTextAreaSouth());
+		}
+		return scrollPane;
+	}
+	private JTextArea getTextAreaSouth() {
+		if (textAreaSouth == null) {
+			textAreaSouth = new JTextArea();
+		}
+		return textAreaSouth;
 	}
 }
