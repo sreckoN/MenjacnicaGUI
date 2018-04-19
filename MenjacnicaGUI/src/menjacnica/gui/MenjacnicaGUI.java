@@ -157,11 +157,11 @@ public class MenjacnicaGUI extends JFrame {
 					if(!tekst.isEmpty()) 
 						tekst += "\n";
 					JFileChooser fc = new JFileChooser();
-					int returnVal = fc.showOpenDialog(popupMenu);
+					int returnVal = fc.showOpenDialog(menuBar);
 					File f;
 					if(returnVal == JFileChooser.APPROVE_OPTION) {
 						f = fc.getSelectedFile();
-						tekst += f.getAbsolutePath();
+						tekst = tekst + "Ucitan fajl: " + f.getAbsolutePath();
 						textAreaSouth.setText(tekst);
 					}
 					
@@ -175,6 +175,22 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmSave() {
 		if (mntmSave == null) {
 			mntmSave = new JMenuItem("Save");
+			mntmSave.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					String tekst = textAreaSouth.getText();
+					if(!tekst.isEmpty()) {
+						tekst += "\n";
+					}
+					JFileChooser fc = new JFileChooser();
+					int retVal = fc.showSaveDialog(menuBar);
+					File f;
+					if(retVal == JFileChooser.APPROVE_OPTION) {
+						f = fc.getSelectedFile();
+						tekst = tekst + "Sacuvan fajl: " + f.getAbsolutePath();
+						textAreaSouth.setText(tekst);
+					}
+				}
+			});
 			mntmSave.setIcon(new ImageIcon(MenjacnicaGUI.class.getResource("/com/sun/java/swing/plaf/windows/icons/FloppyDrive.gif")));
 			mntmSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
 		}
@@ -196,7 +212,7 @@ public class MenjacnicaGUI extends JFrame {
 	private JScrollPane getScrollPaneSouth() {
 		if (scrollPaneSouth == null) {
 			scrollPaneSouth = new JScrollPane();
-			scrollPaneSouth.setPreferredSize(new Dimension(2, 60));
+			scrollPaneSouth.setPreferredSize(new Dimension(2, 80));
 			scrollPaneSouth.setBorder(new TitledBorder(null, "STATUS", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			scrollPaneSouth.setViewportView(getTextAreaSouth());
 		}
