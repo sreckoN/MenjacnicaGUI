@@ -3,12 +3,15 @@ package menjacnica.gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.io.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.Rectangle;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -32,6 +35,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JPopupMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MenjacnicaGUI extends JFrame {
 
@@ -145,6 +151,22 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmOpen() {
 		if (mntmOpen == null) {
 			mntmOpen = new JMenuItem("Open");
+			mntmOpen.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					String tekst = textAreaSouth.getText();
+					if(!tekst.isEmpty()) 
+						tekst += "\n";
+					JFileChooser fc = new JFileChooser();
+					int returnVal = fc.showOpenDialog(popupMenu);
+					File f;
+					if(returnVal == JFileChooser.APPROVE_OPTION) {
+						f = fc.getSelectedFile();
+						tekst += f.getAbsolutePath();
+						textAreaSouth.setText(tekst);
+					}
+					
+				}
+			});
 			mntmOpen.setIcon(new ImageIcon(MenjacnicaGUI.class.getResource("/com/sun/java/swing/plaf/windows/icons/Directory.gif")));
 			mntmOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 		}
