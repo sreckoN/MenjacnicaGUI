@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ObrisiKursGUI extends JFrame {
 
@@ -52,7 +54,6 @@ public class ObrisiKursGUI extends JFrame {
 	public ObrisiKursGUI() {
 		setTitle("Obrisi kurs");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 305, 290);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -167,6 +168,14 @@ public class ObrisiKursGUI extends JFrame {
 	private JCheckBox getChckbxZaistaObrisiKurs() {
 		if (chckbxZaistaObrisiKurs == null) {
 			chckbxZaistaObrisiKurs = new JCheckBox("Zaista obrisi kurs");
+			chckbxZaistaObrisiKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(chckbxZaistaObrisiKurs.isSelected())
+						btnObrisi.setEnabled(true);
+					else 
+						btnObrisi.setEnabled(false);
+				}
+			});
 			chckbxZaistaObrisiKurs.setBounds(10, 186, 130, 23);
 		}
 		return chckbxZaistaObrisiKurs;
@@ -174,6 +183,13 @@ public class ObrisiKursGUI extends JFrame {
 	private JButton getBtnObrisi() {
 		if (btnObrisi == null) {
 			btnObrisi = new JButton("Obrisi");
+			btnObrisi.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String podaci = "";
+					podaci = "Sifra: "+textFieldSifra.getText()+" Naziv: "+textFieldNaziv.getText()+" Prodajni kurs: "+textFieldProdajni.getText()+" Kupovni kurs: "+textFieldKupovni.getText()+" Srednji kurs: "+textFieldSrednji.getText()+" Skraceni naziv: "+textFieldSkraceniNaziv.getText()+"\n";
+					
+				}
+			});
 			btnObrisi.setEnabled(false);
 			btnObrisi.setBounds(10, 224, 130, 23);
 		}
@@ -182,6 +198,11 @@ public class ObrisiKursGUI extends JFrame {
 	private JButton getBtnOdustani() {
 		if (btnOdustani == null) {
 			btnOdustani = new JButton("Odustani");
+			btnOdustani.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					setVisible(false);
+				}
+			});
 			btnOdustani.setBounds(160, 224, 130, 23);
 		}
 		return btnOdustani;
