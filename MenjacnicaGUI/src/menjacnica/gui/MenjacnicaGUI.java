@@ -16,6 +16,7 @@ import java.awt.Rectangle;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
@@ -199,6 +200,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmExit() {
 		if (mntmExit == null) {
 			mntmExit = new JMenuItem("Exit");
+			mntmExit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					izlaz();
+				}
+			});
 			mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.ALT_MASK));
 		}
 		return mntmExit;
@@ -206,6 +212,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmAbout() {
 		if (mntmAbout == null) {
 			mntmAbout = new JMenuItem("About");
+			mntmAbout.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JOptionPane.showMessageDialog(menuBar, "Autor: Srecko Nikolic\nVerzija: 0.1", "About", JOptionPane.INFORMATION_MESSAGE);
+				}
+			});
 		}
 		return mntmAbout;
 	}
@@ -300,5 +311,11 @@ public class MenjacnicaGUI extends JFrame {
 			mntmIzviZamenu = new JMenuItem("Izv\u0161i zamenu");
 		}
 		return mntmIzviZamenu;
+	}
+	private void izlaz() {
+		int opcija = JOptionPane.showConfirmDialog(menuBar, "Da li zelite da izadjete?", "Izlaz", JOptionPane.YES_NO_OPTION);
+		if(opcija == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
 	}
 }
