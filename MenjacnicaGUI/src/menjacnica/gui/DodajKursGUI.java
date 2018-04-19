@@ -165,6 +165,13 @@ public class DodajKursGUI extends JFrame {
 	private JButton getBtnDodaj() {
 		if (btnDodaj == null) {
 			btnDodaj = new JButton("Dodaj");
+			btnDodaj.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					String tekst = null;
+					tekst = "Sifra: "+textFieldSifra.getText()+" Naziv: "+textFieldNaziv.getText()+" Prodajni kurs: "+textFieldProdajni+" Kupovni kurs: "+textFieldKupovni.getText()+" Srednji kurs: "+textFieldSrednji.getText()+" Skraceni naziv: "+textFieldSkraceniNaziv.getText()+"\n";
+					
+				}
+			});
 			btnDodaj.setBounds(10, 194, 130, 23);
 		}
 		return btnDodaj;
@@ -174,7 +181,7 @@ public class DodajKursGUI extends JFrame {
 			btnOdustani = new JButton("Odustani");
 			btnOdustani.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					setVisible(false);
 				}
 			});
 			btnOdustani.setBounds(167, 194, 130, 23);
