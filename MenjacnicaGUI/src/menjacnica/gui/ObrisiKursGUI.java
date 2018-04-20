@@ -31,27 +31,38 @@ public class ObrisiKursGUI extends JFrame {
 	private JCheckBox chckbxZaistaObrisiKurs;
 	private JButton btnObrisi;
 	private JButton btnOdustani;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ObrisiKursGUI frame = new ObrisiKursGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private MenjacnicaGUI gp;
 
 	/**
 	 * Create the frame.
 	 */
+	public ObrisiKursGUI(MenjacnicaGUI gp) {
+		setTitle("Obrisi kurs");
+		setResizable(false);
+		setBounds(100, 100, 305, 290);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(getLblSifra());
+		contentPane.add(getTextFieldSifra());
+		contentPane.add(getLblNaziv());
+		contentPane.add(getTextFieldNaziv());
+		contentPane.add(getLblProdajniKurs());
+		contentPane.add(getTextFieldProdajni());
+		contentPane.add(getLblKupovniKurs());
+		contentPane.add(getTextFieldKupovni());
+		contentPane.add(getLblSrednjiKurs());
+		contentPane.add(getTextFieldSrednji());
+		contentPane.add(getLblSkraceniNaziv());
+		contentPane.add(getTextFieldSkraceniNaziv());
+		contentPane.add(getChckbxZaistaObrisiKurs());
+		contentPane.add(getBtnObrisi());
+		contentPane.add(getBtnOdustani());
+		this.gp = gp;
+	}
 	public ObrisiKursGUI() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Obrisi kurs");
 		setResizable(false);
 		setBounds(100, 100, 305, 290);
@@ -185,9 +196,9 @@ public class ObrisiKursGUI extends JFrame {
 			btnObrisi = new JButton("Obrisi");
 			btnObrisi.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					String podaci = "";
-					podaci = "Sifra: "+textFieldSifra.getText()+" Naziv: "+textFieldNaziv.getText()+" Prodajni kurs: "+textFieldProdajni.getText()+" Kupovni kurs: "+textFieldKupovni.getText()+" Srednji kurs: "+textFieldSrednji.getText()+" Skraceni naziv: "+textFieldSkraceniNaziv.getText()+"\n";
-					
+					String podaci = "Sifra: "+textFieldSifra.getText()+" Naziv: "+textFieldNaziv.getText()+" Prodajni kurs: "+textFieldProdajni.getText()+" Kupovni kurs: "+textFieldKupovni.getText()+" Srednji kurs: "+textFieldSrednji.getText()+" Skraceni naziv: "+textFieldSkraceniNaziv.getText()+"\n";
+					gp.prikazi(podaci);
+					dispose();
 				}
 			});
 			btnObrisi.setEnabled(false);
@@ -200,7 +211,7 @@ public class ObrisiKursGUI extends JFrame {
 			btnOdustani = new JButton("Odustani");
 			btnOdustani.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					setVisible(false);
+					dispose();
 				}
 			});
 			btnOdustani.setBounds(160, 224, 130, 23);

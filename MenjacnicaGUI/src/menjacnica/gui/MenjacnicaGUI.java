@@ -62,6 +62,9 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem mntmDodajKurs;
 	private JMenuItem mntmObrisiKurs;
 	private JMenuItem mntmIzviZamenu;
+	private MenjacnicaGUI gp;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -112,7 +115,7 @@ public class MenjacnicaGUI extends JFrame {
 			btnDodajKurs = new JButton("Dodaj kurs");
 			btnDodajKurs.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					DodajKursGUI dodaj = new DodajKursGUI();
+					DodajKursGUI dodaj = new DodajKursGUI(gp);
 					dodaj.setVisible(true);
 					
 				}
@@ -125,7 +128,7 @@ public class MenjacnicaGUI extends JFrame {
 			btnObrisiKurs = new JButton("Obrisi kurs");
 			btnObrisiKurs.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ObrisiKursGUI obrisi = new ObrisiKursGUI();
+					ObrisiKursGUI obrisi = new ObrisiKursGUI(gp);
 					obrisi.setVisible(true);
 				}
 			});
@@ -137,7 +140,7 @@ public class MenjacnicaGUI extends JFrame {
 			btnIzvrsiZamenu = new JButton("Izvrsi zamenu");
 			btnIzvrsiZamenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					IzvrsiZamenuGUI zamena = new IzvrsiZamenuGUI();
+					IzvrsiZamenuGUI zamena = new IzvrsiZamenuGUI(gp);
 					zamena.setVisible(true);
 				}
 			});
@@ -318,7 +321,7 @@ public class MenjacnicaGUI extends JFrame {
 			mntmDodajKurs = new JMenuItem("Dodaj Kurs");
 			mntmDodajKurs.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					DodajKursGUI dodaj = new DodajKursGUI();
+					DodajKursGUI dodaj = new DodajKursGUI(gp);
 					dodaj.setVisible(true);
 				}
 			});
@@ -354,5 +357,8 @@ public class MenjacnicaGUI extends JFrame {
 		if(opcija == JOptionPane.YES_OPTION) {
 			System.exit(0);
 		}
+	}
+	void prikazi(String tekst) {
+		textAreaSouth.setText(tekst);
 	}
 }

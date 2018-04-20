@@ -36,27 +36,13 @@ public class IzvrsiZamenuGUI extends JFrame {
 	private JButton btnIzvrsiZamenu;
 	private JButton btnOdustani;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IzvrsiZamenuGUI frame = new IzvrsiZamenuGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private MenjacnicaGUI gp;
 
 	/**
 	 * Create the frame.
 	 */
 	public IzvrsiZamenuGUI() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Izvrsi zamenu");
 		setResizable(false);
 		setBounds(100, 100, 368, 278);
@@ -78,6 +64,30 @@ public class IzvrsiZamenuGUI extends JFrame {
 		contentPane.add(getSlider());
 		contentPane.add(getBtnIzvrsiZamenu());
 		contentPane.add(getBtnOdustani());
+	}
+	public IzvrsiZamenuGUI(MenjacnicaGUI gp) {
+		setTitle("Izvrsi zamenu");
+		setResizable(false);
+		setBounds(100, 100, 368, 278);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(getLblKupovniKurs());
+		contentPane.add(getTextFieldKupovni());
+		contentPane.add(getLblValuta());
+		contentPane.add(getComboBox());
+		contentPane.add(getLblProdajniKurs());
+		contentPane.add(getTextFieldProdajni());
+		contentPane.add(getLblIznos());
+		contentPane.add(getTextFieldIznos());
+		contentPane.add(getLblVrstaTransakcije());
+		contentPane.add(getRdbtnKupovina());
+		contentPane.add(getRdbtnProdaja());
+		contentPane.add(getSlider());
+		contentPane.add(getBtnIzvrsiZamenu());
+		contentPane.add(getBtnOdustani());
+		this.gp = gp;
 	}
 
 	private JLabel getLblKupovniKurs() {
@@ -203,6 +213,8 @@ public class IzvrsiZamenuGUI extends JFrame {
 						podaci = "Valuta: "+comboBox.getSelectedItem()+" Iznos: "+textFieldIznos.getText()+" Kupovina\n";
 					else
 						podaci = "Valuta: "+comboBox.getSelectedItem()+" Iznos: "+textFieldIznos.getText()+" Prodaja\n";
+					gp.prikazi(podaci);
+					dispose();
 				}
 			});
 			btnIzvrsiZamenu.setBounds(34, 215, 130, 23);
@@ -214,7 +226,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 			btnOdustani = new JButton("Odustani");
 			btnOdustani.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					setVisible(false);
+					dispose();
 				}
 			});
 			btnOdustani.setBounds(200, 215, 130, 23);

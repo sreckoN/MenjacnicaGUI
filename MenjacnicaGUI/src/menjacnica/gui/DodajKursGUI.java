@@ -29,11 +29,12 @@ public class DodajKursGUI extends JFrame {
 	private JTextField textFieldSkraceniNaziv;
 	private JButton btnDodaj;
 	private JButton btnOdustani;
+	private MenjacnicaGUI gp;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -44,12 +45,37 @@ public class DodajKursGUI extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
+	public DodajKursGUI(MenjacnicaGUI gp) {
+		setResizable(false);
+		setTitle("Dodaj kurs");
+		setBounds(100, 100, 317, 257);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(getLblSifra());
+		contentPane.add(getTextFieldSifra());
+		contentPane.add(getLblNaziv());
+		contentPane.add(getTextFieldNaziv());
+		contentPane.add(getLblProdajniKurs());
+		contentPane.add(getTextFieldProdajni());
+		contentPane.add(getLblKupovniKurs());
+		contentPane.add(getTextFieldKupovni());
+		contentPane.add(getLblSrednjiKurs());
+		contentPane.add(getTextFieldSrednji());
+		contentPane.add(getLblSkraceniNaziv());
+		contentPane.add(getTextFieldSkraceniNaziv());
+		contentPane.add(getBtnDodaj());
+		contentPane.add(getBtnOdustani());
+		this.gp = gp;
+	}
 	public DodajKursGUI() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setTitle("Dodaj kurs");
 		setBounds(100, 100, 317, 257);
@@ -167,9 +193,10 @@ public class DodajKursGUI extends JFrame {
 			btnDodaj = new JButton("Dodaj");
 			btnDodaj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					String tekst = null;
-					tekst = "Sifra: "+textFieldSifra.getText()+" Naziv: "+textFieldNaziv.getText()+" Prodajni kurs: "+textFieldProdajni+" Kupovni kurs: "+textFieldKupovni.getText()+" Srednji kurs: "+textFieldSrednji.getText()+" Skraceni naziv: "+textFieldSkraceniNaziv.getText()+"\n";
+					String tekst = "Sifra: "+textFieldSifra.getText()+" Naziv: "+textFieldNaziv.getText()+" Prodajni kurs: "+textFieldProdajni.getText()+" Kupovni kurs: "+textFieldKupovni.getText()+" Srednji kurs: "+textFieldSrednji.getText()+" Skraceni naziv: "+textFieldSkraceniNaziv.getText()+"\n";
+					gp.prikazi(tekst);;
 					
+					dispose();
 				}
 			});
 			btnDodaj.setBounds(10, 194, 130, 23);
@@ -181,7 +208,7 @@ public class DodajKursGUI extends JFrame {
 			btnOdustani = new JButton("Odustani");
 			btnOdustani.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					setVisible(false);
+					dispose();
 				}
 			});
 			btnOdustani.setBounds(167, 194, 130, 23);
