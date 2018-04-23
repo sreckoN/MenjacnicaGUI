@@ -39,6 +39,8 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MenjacnicaGUI extends JFrame {
 
@@ -86,10 +88,17 @@ public class MenjacnicaGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public MenjacnicaGUI() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				izlaz();
+			}
+		});
+		
 		setTitle("Menjacnica");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenjacnicaGUI.class.getResource("/icons/icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 508, 340);
+		setBounds(100, 100, 641, 379);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
 		contentPane.setBorder(null);
@@ -98,6 +107,7 @@ public class MenjacnicaGUI extends JFrame {
 		contentPane.add(getPanelEast(), BorderLayout.EAST);
 		contentPane.add(getScrollPaneSouth(), BorderLayout.SOUTH);
 		contentPane.add(getScrollPaneCenter(), BorderLayout.CENTER);
+		this.gp = this;
 	}
 
 	private JPanel getPanelEast() {
@@ -353,12 +363,14 @@ public class MenjacnicaGUI extends JFrame {
 		return mntmIzviZamenu;
 	}
 	private void izlaz() {
-		int opcija = JOptionPane.showConfirmDialog(menuBar, "Da li zelite da izadjete?", "Izlaz", JOptionPane.YES_NO_OPTION);
-		if(opcija == JOptionPane.YES_OPTION) {
+		int opcija = JOptionPane.showConfirmDialog(null, "Da li zelite da izadjete?", "Izlaz", JOptionPane.YES_NO_CANCEL_OPTION);
+		if(opcija == JOptionPane.YES_OPTION)
 			System.exit(0);
-		}
 	}
 	void prikazi(String tekst) {
-		textAreaSouth.setText(tekst);
+		if(textAreaSouth.getText().isEmpty())
+			textAreaSouth.setText(tekst+"\n");
+		else 
+			textAreaSouth.setText(textAreaSouth.getText()+tekst);
 	}
 }
